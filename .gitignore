@@ -1,0 +1,24 @@
+# Ignore everything by default
+*
+
+# Un-ignore the RECURSOR core
+!RECURSOR/
+!RECURSOR/SKILLS/
+!RECURSOR/SKILLS/*.md
+
+# Un-ignore agents
+!.github/
+!.github/agents/
+!.github/agents/*.md
+
+# Un-ignore bootstrap
+!BOOTSTRAP/
+!BOOTSTRAP/*.md
+
+# Un-ignore repo config
+!.gitignore
+!README.md
+!LICENSE
+
+# Always ignore Opus-only skills (private)
+RECURSOR/SKILLS/OPUS/
