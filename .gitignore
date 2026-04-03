@@ -1,0 +1,24 @@
+# Precursor .gitignore
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+!.vscode/settings.json
+.idea/
+
+# Runtime / generated
+docs/
+PLANS/
+PROJECTS.md
+WORKFLOWS/
+
+# Node (if any project uses it)
+node_modules/
+
+# Python (if any project uses it)
+__pycache__/
+*.pyc
+.venv/
