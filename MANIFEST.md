@@ -34,3 +34,9 @@ Complete inventory of every file in the Precursor package.
 | `README.md` | Project identity document — what Precursor is, how it differs, governance model |
 | `START_HERE.md` | Quickstart guide — from clone to operational in ≤10 steps |
 | `MANIFEST.md` | This file — complete file inventory for the Precursor package |
+
+## Tools (`tools/`)
+
+| Path | Description |
+|---|---|
+| `tools/extract-chat-logs.mjs` | Extracts Opus Copilot Chat sessions from VS Code JSONL storage as markdown transcripts. Zero external dependencies. |

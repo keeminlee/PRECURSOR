@@ -90,5 +90,13 @@ The UPDATE line is the canonical one-liner written back into the parent root pla
 - If PROGRESS.md does not exist or Status is still `IN PROGRESS`, stop and reply:
   > *"PROGRESS.md is not complete. Finish the step with `@PrecursorExecute execute PLANS/{slug}/{n}_{step-name}/` first."*
 
+**Git commit:**
+After writing CLOSEOUT.md and propagating the UPDATE, commit the changes:
+1. `git add -A` from the workspace root
+2. `git commit -m "closeout: {slug} step {n} — {UPDATE one-liner}"`
+3. Confirm with `git log --oneline -1`
+
+If the workspace has no `.git/` or git is unavailable, skip and note it.
+
 **After completing:**
-> *"Closed out. {slug}.md step row updated. Full plan status: [paste current Steps table]"*
+> *"Closed out and committed. {slug}.md step row updated. Full plan status: [paste current Steps table]"*
