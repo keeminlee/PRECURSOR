@@ -10,8 +10,8 @@ Complete inventory of every file in the Precursor package.
 |---|---|
 | `SKILLS/BOOTSTRAP.md` | First-time setup flow — creates directories, installs skills, registers agents |
 | `SKILLS/CONFIG_PROJECTS.md` | Project registry scanner — discovers and classifies workspace projects |
-| `SKILLS/FIRST_BREW.md` | Guided first session walkthrough for new users |
-| `SKILLS/MORNING_COFFEE.md` | Daily orientation and priority stack (6-section schema) |
+| `SKILLS/FIRST_BREW.md` | Guided first session walkthrough — Plan → Execute → Closeout cycle |
+| `SKILLS/MORNING_COFFEE.md` | Daily orientation and priority stack |
 | `SKILLS/RECURSE_CLOSEOUT.md` | Closeout mode — writes completion records and propagates status |
 | `SKILLS/RECURSE_EXECUTE.md` | Execute mode — implements single-pass steps with audit trail |
 | `SKILLS/RECURSE_PLAN.md` | Plan mode — decomposes tasks into step trees with human review gates |

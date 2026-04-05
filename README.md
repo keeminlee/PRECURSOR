@@ -1,21 +1,21 @@
 # Precursor
 
-> A human-governed, Sonnet-centered recursive task workflow system with visible markdown task/spec trees, strong onboarding, and enforced human review between every agentic step.
+> A structured, human-governed workflow for GitHub Copilot that enforces review between every meaningful step.
 
 ---
 
 ## What Is Precursor?
 
-Precursor is a structured plan → execute → closeout workflow for VS Code Copilot. It turns chat agents into a governed development pipeline with mandatory human review gates between every meaningful step.
+Precursor is a **Plan → Execute → Closeout** workflow for VS Code Copilot. It turns AI chat agents into a governed development pipeline where every action stops for human review before proceeding.
 
-Precursor operates on a single model lane (Sonnet) and enforces human-in-the-loop governance by design — no agent auto-continues, no autonomous chaining.
+No agent auto-continues. No autonomous chaining. You review, you decide, you invoke the next step.
 
 ---
 
 ## What's Inside
 
-- `SKILLS/` — 8 reusable task specs (markdown files) that define agent behaviors
-- `.github/agents/` — 5 VS Code Copilot agent modes that read and execute the skills
+- `SKILLS/` — Workflow specs (markdown files) that define agent behaviors
+- `.github/agents/` — VS Code Copilot agent modes that read and execute the skills
 - `START_HERE.md` — Quickstart guide
 - `MANIFEST.md` — Complete file inventory
 
@@ -27,9 +27,20 @@ See [START_HERE.md](START_HERE.md).
 
 ---
 
-## Governance Model
+## How It Works
 
-Every Precursor agent completes its bounded action, then **stops and presents its work for human review**:
+### The Core Loop
+
+```
+@PrecursorPlan {task}     →  breaks your task into concrete steps
+    ⏸ you review the plan
+@PrecursorExecute {step}  →  implements one step, writes a progress log
+    ⏸ you review the work
+@PrecursorCloseout {step} →  records what happened, updates the plan
+    ⏸ you confirm
+```
+
+Every transition requires your explicit invocation. This is the human review gate:
 
 ```
 ---
@@ -40,24 +51,10 @@ Every Precursor agent completes its bounded action, then **stops and presents it
 ---
 ```
 
-No agent auto-continues. The user must explicitly invoke the next step. This creates a structural human-in-the-loop gate at every transition.
-
----
-
-## Core Loop
+### Daily Start
 
 ```
-@PrecursorPlan {task}     →  creates a plan tree under PLANS/
-@PrecursorExecute {step}  →  implements a single step, writes PROGRESS.md
-@PrecursorCloseout {step} →  writes CLOSEOUT.md, propagates status back to plan
-```
-
----
-
-## Daily Loop
-
-```
-@PrecursorStart           →  rehydrates context, runs morning coffee
+@PrecursorStart           →  rehydrates context, shows priorities
 ```
 
 ---
@@ -66,9 +63,9 @@ No agent auto-continues. The user must explicitly invoke the next step. This cre
 
 | Skill | Purpose |
 |-------|---------|
-| RECURSE_PLAN | Decompose tasks into step trees |
-| RECURSE_EXECUTE | Implement single-pass steps with audit trail |
-| RECURSE_CLOSEOUT | Write completion records, propagate status |
+| **RECURSE_PLAN** | Break tasks into bounded steps |
+| **RECURSE_EXECUTE** | Implement a single step with audit trail |
+| **RECURSE_CLOSEOUT** | Record what happened, update the plan |
 | RECURSE_REFOCUS | Mid-session reorientation (read-only) |
 | MORNING_COFFEE | Daily orientation and priority stack |
 | CONFIG_PROJECTS | Scan workspace, build project registry |
@@ -77,24 +74,24 @@ No agent auto-continues. The user must explicitly invoke the next step. This cre
 
 ---
 
-## Agent Naming Convention
+## Agents
 
-All Precursor agents use the `Precursor` prefix:
-
-- **PrecursorStart** — bootstrap and onboarding
-- **PrecursorPlan** — recursive task planning
-- **PrecursorExecute** — single-pass step execution
-- **PrecursorCloseout** — step closeout and audit
-- **PrecursorRefocus** — context recovery and reorientation
+| Agent | What it does |
+|-------|-------------|
+| **@PrecursorPlan** | Creates a plan from a task description |
+| **@PrecursorExecute** | Implements one step at a time |
+| **@PrecursorCloseout** | Closes out a step with a completion record |
+| @PrecursorStart | Boots your session with context and priorities |
+| @PrecursorRefocus | Quick "where am I?" summary (read-only) |
 
 ---
 
 ## Directory Structure
 
 ```
-.github/agents/         ← 5 agent definitions for VS Code Copilot
-SKILLS/                 ← 8 workflow skill specs
-README.md               ← this file
-START_HERE.md           ← quickstart guide
-MANIFEST.md             ← complete file inventory
+.github/agents/         ← Agent definitions for VS Code Copilot
+SKILLS/                 ← Workflow skill specs
+README.md               ← This file
+START_HERE.md           ← Quickstart guide
+MANIFEST.md             ← Complete file inventory
 ```

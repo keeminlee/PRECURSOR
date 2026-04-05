@@ -28,11 +28,9 @@ This skill produces `.md` files under the plan tree only. It never reads or writ
 |---|---|---|
 | PLAN | `{task description}` | `@PrecursorPlan add retry logic to the backend` |
 | PLAN (slug override) | `slug={name} {task description}` | `@PrecursorPlan slug=b360-retry add retry logic` |
-| WORKFLOW | `from WORKFLOWS/{name}/ slug={slug}` | `@PrecursorPlan from WORKFLOWS/EOD-CLOSEOUT/ slug=eod-closeout-04-02` |
 | RECURSE | `recurse {path}/{n}_{step-name}/` | `@PrecursorPlan recurse docs/week_2/04_02_2026/PLANS/b360-retry/2_add-backoff/` |
 
 Default mode if no prefix is recognized: **PLAN**.
-If the argument starts with `from WORKFLOWS/`: **WORKFLOW**.
 If the argument starts with `recurse`: **RECURSE**.
 
 ---
@@ -248,35 +246,6 @@ single-pass is unsafe. If SINGLE-PASS: state why the scope is bounded and unambi
 - Sub-step specs' Parent pointer: `[../{n}_{step-name}.md](../{n}_{step-name}.md)` — the expanded spec
 - After writing, display the sub-steps table and end with:
   > *"Sub-plan ready. To implement: `@PrecursorExecute execute {path-to-step}/{m}_{sub-step}/`"*
-
----
-
-### WORKFLOW
-
-**Trigger:** Invocation starts with `from WORKFLOWS/{name}/`
-
-**Read:**
-- `WORKFLOWS/{name}/{name}.md` — the workflow template (root spec)
-- All step template specs under `WORKFLOWS/{name}/{n}_{step-name}/`
-- `PROJECTS.md` — for project context
-
-**Resolve:**
-- Today's plan directory per the Path Resolution section
-- All `{tokens}` defined in the workflow's Path Conventions section (e.g. `{date}`, `{transcript}`, `{prev_date}`)
-
-**Write:**
-- `docs/week_N/{date}/PLANS/{slug}/{slug}.md` — root plan file with:
-  - `> **Source workflow:** WORKFLOWS/{name}/` line in header
-  - All `{tokens}` resolved to today's actual paths
-  - Steps table with Status and Update columns added (initially `NOT STARTED` / `—`)
-- `docs/week_N/{date}/PLANS/{slug}/{n}_{step-name}/{n}_{step-name}.md` — step specs with resolved paths
-
-**Key rules:**
-- WORKFLOW mode is PLAN mode with a template — the same hard guards apply (two tiers, no sub-steps)
-- The workflow template defines the structure; WORKFLOW mode resolves tokens and adds lifecycle columns
-- If the workflow's step specs use path tokens (`{date}`, `{transcript}`), resolve all of them to concrete values
-- After writing, display the steps table and end with:
-  > *"Plan instantiated from WORKFLOWS/{name}/. To implement: `@PrecursorExecute execute docs/week_N/{date}/PLANS/{slug}/{n}_{step-name}/`"*
 
 ---
 

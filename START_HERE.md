@@ -6,15 +6,15 @@ Clone. Open. Run `@PrecursorStart`. You're operational.
 
 ## Setup (≤10 steps)
 
-1. **Prerequisites:** VS Code with the GitHub Copilot extension (chat enabled). Sonnet model access required.
+1. **Prerequisites:** VS Code with the GitHub Copilot extension (chat enabled).
 2. **Clone** this repo (or download as ZIP) into an empty folder — or into the root of an existing project.
 3. **Open** the folder in VS Code.
 4. **Verify** that `SKILLS/` and `.github/agents/` directories exist.
 5. **Open Copilot chat** and type: `@PrecursorStart`
 6. `@PrecursorStart` detects no `PROJECTS.md` and runs **CONFIG_PROJECTS** automatically — it scans your workspace and builds a project registry.
 7. **Review** the generated `PROJECTS.md`. Confirm the project list is correct.
-8. **Done.** You're operational. `@PrecursorStart` runs your morning coffee daily.
-9. For a deeper walkthrough of agents and the daily loop: **`Run FIRST_BREW`**
+8. **Done.** You're operational.
+9. For a guided walkthrough of Plan → Execute → Closeout: **`Run FIRST_BREW`**
 10. For the full setup and verification flow: **`Run BOOTSTRAP`**
 
 ---
