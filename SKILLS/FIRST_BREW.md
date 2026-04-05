@@ -1,7 +1,7 @@
 # SKILL: FIRST_BREW
 
 > **Type:** Reusable task spec
-> **Trigger:** First working session after BOOTSTRAP
+> **Trigger:** First working session with Precursor
 > **Invocation:** "Run FIRST_BREW"
 
 ---
@@ -10,13 +10,13 @@
 
 Walk a new user through the core Precursor workflow: **Plan → Execute → Closeout**. By the end, the user will have planned a simple task, executed a step, closed it out, and understood the human review gate pattern.
 
-**Prerequisite:** BOOTSTRAP must have been run successfully. All skills are installed in `SKILLS/` and all agents are registered in `.github/agents/`.
+**Prerequisite:** `SKILLS/` and `.github/agents/` directories exist. (If you cloned the repo, they already do.)
 
 ---
 
 ## Your First Plan → Execute → Closeout Cycle
 
-This is the core of Precursor. Pick any small task — "add a README to my project" works fine.
+Use the demo task from [demo/TOY_TASK.md](../demo/TOY_TASK.md), or pick any small task — "add a README to my project" also works fine.
 
 ### Step 1: Plan
 
@@ -89,7 +89,7 @@ Every meaningful action in Precursor follows the same shape:
 1. **Agent acts** — produces a bounded output (plan, code, record)
 2. **Agent stops** — presents the `⏸ AWAITING YOUR REVIEW` gate
 3. **You review** — check, edit, confirm
-4. **You invoke next** — explicitly call the next agent
+4. **You select next** — explicitly select the next agent from the dropdown
 
 No agent ever auto-continues. You are always in control.
 

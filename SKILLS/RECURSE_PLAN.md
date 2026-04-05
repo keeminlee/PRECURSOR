@@ -179,7 +179,7 @@ single-pass is unsafe. If SINGLE-PASS: state why the scope is bounded and unambi
 > **If you catch yourself creating sub-step directories during PLAN mode — stop. That is RECURSE, not PLAN.**
 
 **Read (in parallel):**
-- `PROJECTS.md` — understand what projects and files exist
+- `PROJECTS.md` — if it exists, use it to understand what projects and files exist. If absent, skip.
 - Any source files the task description references directly
 
 **Resolve:** today's plan directory per the Path Resolution section above.
