@@ -29,7 +29,7 @@ After completing your planning action, output the following block:
 ⏸ AWAITING YOUR REVIEW
 - [ ] Review the plan output above
 - [ ] Revise if needed (edit files directly)
-- [ ] When satisfied, invoke the next agent: @PrecursorExecute execute PLANS/{slug}/{n}_{step-name}/
+- [ ] When satisfied, select @PrecursorExecute from the dropdown: execute PLANS/{slug}/{n}_{step-name}/
 ---
 ```
 

@@ -19,15 +19,13 @@ If `PROJECTS.md` already exists, run as a **diff** — add newly discovered proj
 List the workspace root. Then, for each top-level folder that is **not** infrastructure, list its direct children.
 
 **Exclude these infrastructure folders entirely:**
-- `CANON/`
 - `docs/`
 - `PLANS/`
 - `.github/`
-- `.obsidian/`
 - `.venv/`
-- `_backup/`
 - `data/`
 - `SKILLS/`
+- `node_modules/`
 
 For each candidate folder found (top-level or one level deep inside a top-level), check for the presence of these indicator files:
 

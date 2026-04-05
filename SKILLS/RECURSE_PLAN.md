@@ -10,13 +10,12 @@
 
 ## Purpose
 
-Create and manage recursive plan trees. Three primary modes:
+Create and manage plan trees. Two modes:
 
-- **PLAN** — decompose a task description into a tree of step specs under today's day-level directory
+- **PLAN** — decompose a task description into a tree of step specs
 - **RECURSE** — expand a SPLIT-rated step into its own sub-plan tree
-- **WORKFLOW** — instantiate a day-scoped plan from a reusable workflow template in `WORKFLOWS/`
 
-New plans are created at `docs/week_N/{date}/PLANS/{slug}/` (day-level). Legacy plans at root `PLANS/` are still readable by EXECUTE and CLOSEOUT.
+Plans are created under `PLANS/{slug}/`.
 
 This skill produces `.md` files under the plan tree only. It never reads or writes project source code, config files, scripts, or anything outside the plan tree.
 
@@ -28,7 +27,7 @@ This skill produces `.md` files under the plan tree only. It never reads or writ
 |---|---|---|
 | PLAN | `{task description}` | `@PrecursorPlan add retry logic to the backend` |
 | PLAN (slug override) | `slug={name} {task description}` | `@PrecursorPlan slug=b360-retry add retry logic` |
-| RECURSE | `recurse {path}/{n}_{step-name}/` | `@PrecursorPlan recurse docs/week_2/04_02_2026/PLANS/b360-retry/2_add-backoff/` |
+| RECURSE | `recurse {path}/{n}_{step-name}/` | `@PrecursorPlan recurse PLANS/b360-retry/2_add-backoff/` |
 
 Default mode if no prefix is recognized: **PLAN**.
 If the argument starts with `recurse`: **RECURSE**.
@@ -47,13 +46,7 @@ If the user prefixes with `slug={name}`, use that value exactly.
 
 ## Path Resolution
 
-Before writing any files in PLAN or WORKFLOW mode, resolve today's plan directory:
-
-1. Determine today's date in `MM_DD_YYYY` format
-2. List `docs/` for `week_N/` folders
-3. Find the `week_N/` that contains (or should contain) today's date directory
-4. Target path: `docs/week_N/{date}/PLANS/{slug}/`
-5. Create `PLANS/` under the day directory if it doesn't exist
+Plans are written to `PLANS/{slug}/` at the workspace root.
 
 For RECURSE mode, the path is provided in the invocation — no resolution needed.
 
@@ -62,7 +55,7 @@ For RECURSE mode, the path is provided in the invocation — no resolution neede
 ## Plans Tree Structure
 
 ```
-docs/week_N/{date}/PLANS/
+PLANS/
 └── {slug}/
     ├── {slug}.md                    ← root plan file; named identically to directory
     ├── {1}_{step-name}/
@@ -192,15 +185,15 @@ single-pass is unsafe. If SINGLE-PASS: state why the scope is bounded and unambi
 **Resolve:** today's plan directory per the Path Resolution section above.
 
 **Write:**
-- `docs/week_N/{date}/PLANS/{slug}/{slug}.md` — root plan file
-- `docs/week_N/{date}/PLANS/{slug}/{n}_{step-name}/{n}_{step-name}.md` — one spec per step, nothing else inside the step directory
+- `PLANS/{slug}/{slug}.md` — root plan file
+- `PLANS/{slug}/{n}_{step-name}/{n}_{step-name}.md` — one spec per step, nothing else inside the step directory
 
 **Key rules:**
 - Assign `SINGLE-PASS` or `SPLIT` to every step; never leave recommendation blank
 - Include Reasoning in every step spec
 - Steps table must include the Directory column
 - After writing, display the steps table inline in chat as a confirmation summary, then end with:
-  > *"Plan ready. To implement: `@PrecursorExecute execute docs/week_N/{date}/PLANS/{slug}/{n}_{step-name}/`"*
+  > *"Plan ready. To implement: `@PrecursorExecute execute PLANS/{slug}/{n}_{step-name}/`"*
 
 ---
 

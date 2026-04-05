@@ -20,6 +20,6 @@ After writing CLOSEOUT.md and propagating the UPDATE line, output the following 
 ⏸ AWAITING YOUR REVIEW
 - [ ] Review CLOSEOUT.md and the updated parent plan
 - [ ] Revise if needed (edit files directly)
-- [ ] When satisfied, invoke the next step: @PrecursorPlan or @PrecursorExecute as appropriate
+- [ ] When satisfied, select @PrecursorPlan or @PrecursorExecute from the dropdown as appropriate
 ---
 ```

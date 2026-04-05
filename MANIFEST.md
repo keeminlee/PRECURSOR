@@ -21,10 +21,10 @@ Complete inventory of every file in the Precursor package.
 
 | Path | Description |
 |---|---|
-| `.github/agents/PrecursorStart.agent.md` | Boot agent — rehydrates context and runs MORNING_COFFEE |
-| `.github/agents/PrecursorPlan.agent.md` | Creates plan trees from task descriptions (Phase 1 of Plan → Review → Execute → Review → Closeout → Review) |
-| `.github/agents/PrecursorExecute.agent.md` | Implements single-pass steps with audit trail (Phase 2) |
-| `.github/agents/PrecursorCloseout.agent.md` | Writes closeout records and propagates status updates (Phase 3) |
+| `.github/agents/PrecursorPlan.agent.md` | Creates a plan from a task description |
+| `.github/agents/PrecursorExecute.agent.md` | Implements one step at a time with audit trail |
+| `.github/agents/PrecursorCloseout.agent.md` | Closes out a step with a completion record |
+| `.github/agents/PrecursorStart.agent.md` | Boots your session with context and priorities |
 | `.github/agents/PrecursorRefocus.agent.md` | Mid-session reorientation (read-only) |
 
 ## Project Files (root)
@@ -35,8 +35,4 @@ Complete inventory of every file in the Precursor package.
 | `START_HERE.md` | Quickstart guide — from clone to operational in ≤10 steps |
 | `MANIFEST.md` | This file — complete file inventory for the Precursor package |
 
-## Tools (`tools/`)
 
-| Path | Description |
-|---|---|
-| `tools/extract-chat-logs.mjs` | Extracts Opus Copilot Chat sessions from VS Code JSONL storage as markdown transcripts. Zero external dependencies. |

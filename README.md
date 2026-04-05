@@ -8,7 +8,7 @@
 
 Precursor is a **Plan → Execute → Closeout** workflow for VS Code Copilot. It turns AI chat agents into a governed development pipeline where every action stops for human review before proceeding.
 
-No agent auto-continues. No autonomous chaining. You review, you decide, you invoke the next step.
+No agent auto-continues. No autonomous chaining. You review, you decide, you select the next step.
 
 ---
 
@@ -31,58 +31,35 @@ See [START_HERE.md](START_HERE.md).
 
 ### The Core Loop
 
-```
-@PrecursorPlan {task}     →  breaks your task into concrete steps
-    ⏸ you review the plan
-@PrecursorExecute {step}  →  implements one step, writes a progress log
-    ⏸ you review the work
-@PrecursorCloseout {step} →  records what happened, updates the plan
-    ⏸ you confirm
-```
+1. Select **@PrecursorPlan** from the Copilot dropdown and describe your task
+2. ⏸ Review the plan
+3. Select **@PrecursorExecute** and point it at the first step
+4. ⏸ Review the implementation
+5. Select **@PrecursorCloseout** to record what happened
+6. ⏸ Review the closeout record
 
-Every transition requires your explicit invocation. This is the human review gate:
+Every transition requires your explicit action. This is the **human review gate**:
 
 ```
 ---
 ⏸ AWAITING YOUR REVIEW
 - [ ] Review the output above
 - [ ] Revise if needed (edit files directly)
-- [ ] When satisfied, invoke the next agent: @{NextAgent} {path}
+- [ ] When satisfied, select the next agent from the dropdown
 ---
 ```
-
-### Daily Start
-
-```
-@PrecursorStart           →  rehydrates context, shows priorities
-```
-
----
-
-## Skills
-
-| Skill | Purpose |
-|-------|---------|
-| **RECURSE_PLAN** | Break tasks into bounded steps |
-| **RECURSE_EXECUTE** | Implement a single step with audit trail |
-| **RECURSE_CLOSEOUT** | Record what happened, update the plan |
-| RECURSE_REFOCUS | Mid-session reorientation (read-only) |
-| MORNING_COFFEE | Daily orientation and priority stack |
-| CONFIG_PROJECTS | Scan workspace, build project registry |
-| BOOTSTRAP | First-time setup flow |
-| FIRST_BREW | Guided first session walkthrough |
 
 ---
 
 ## Agents
+
+Select an agent from the Copilot chat dropdown:
 
 | Agent | What it does |
 |-------|-------------|
 | **@PrecursorPlan** | Creates a plan from a task description |
 | **@PrecursorExecute** | Implements one step at a time |
 | **@PrecursorCloseout** | Closes out a step with a completion record |
-| @PrecursorStart | Boots your session with context and priorities |
-| @PrecursorRefocus | Quick "where am I?" summary (read-only) |
 
 ---
 

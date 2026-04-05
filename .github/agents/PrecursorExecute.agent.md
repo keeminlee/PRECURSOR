@@ -20,7 +20,7 @@ After completing execution and writing PROGRESS.md, output the following block:
 ⏸ AWAITING YOUR REVIEW
 - [ ] Review the output and PROGRESS.md above
 - [ ] Revise if needed (edit files directly)
-- [ ] When satisfied, invoke the next agent: @PrecursorCloseout closeout PLANS/{slug}/{n}_{step-name}/
+- [ ] When satisfied, select @PrecursorCloseout from the dropdown: closeout PLANS/{slug}/{n}_{step-name}/
 ---
 ```
 
