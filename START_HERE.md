@@ -34,7 +34,7 @@ Open [demo/TOY_TASK.md](demo/TOY_TASK.md). This is a small, self-contained task:
 ### Step 2: Plan
 
 1. Open the **Copilot chat** panel
-2. Click the **agent dropdown** (top of the chat panel) and select **@PrecursorPlan**
+2. Click the **agent dropdown** (bottom left in the chat panel, just below the chatbox where it says "Agent") and select **@PrecursorPlan**
 3. Paste or type the task from `demo/TOY_TASK.md`
 
 The Plan agent will decompose the task into concrete steps and write a plan under `PLANS/`. When it finishes, it stops and shows a review gate:
