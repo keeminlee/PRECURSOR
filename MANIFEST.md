@@ -47,6 +47,5 @@ Complete inventory of every file in the Precursor package.
 | `README.md` | Project identity — what Precursor is, how it works |
 | `START_HERE.md` | Quick Start — from clone to first demo run in 5 minutes |
 | `MANIFEST.md` | This file — complete file inventory |
-| `DEMO_WALKTHROUGH.md` | Presenter guide for live demo with fallback paths |
 
 
