@@ -41,6 +41,7 @@ PLANS/{slug}/
 # CLOSEOUT: {n}_{step-name}
 > **Parent:** [{n}_{step-name}.md]({n}_{step-name}.md)
 > **Final Status:** COMPLETE | PARTIAL | BLOCKED
+> **Quality Gate:** GREEN | YELLOW | RED
 > **Closed:** {MM_DD_YYYY}
 
 ---
@@ -48,6 +49,11 @@ PLANS/{slug}/
 ## Final State
 
 {One paragraph: what exists now that didn't before, and what works.}
+
+## Quality Assessment
+
+**Gate: {GREEN | YELLOW | RED}**
+{One sentence justifying the gate. See Quality Gate Definitions below.}
 
 ## Spec → Progress Delta
 
@@ -60,10 +66,26 @@ If none: "Implemented as specified."}
 
 ## UPDATE
 
-> Step {n} complete — {what was achieved, ≤15 words}
+> Step {n} complete — {what was achieved, ≤15 words} [{QUALITY_GATE}]
 ```
 
-The UPDATE line is the canonical one-liner written back into the parent root plan's steps table under the Update column.
+The UPDATE line is the canonical one-liner written back into the parent root plan's steps table under the Update column. The quality gate tag (e.g. `[GREEN]`) is appended so the parent plan summary shows quality at a glance.
+
+---
+
+## Quality Gate Definitions
+
+| Gate | Meaning | Criteria |
+|------|---------|----------|
+| **GREEN** | Fully meets spec | All acceptance criteria met as written. No scope changes, no deferred items, no known issues. Output ready to build on. |
+| **YELLOW** | Meets intent, minor gaps | Acceptance criteria met but with scope adjustments, non-blocking deferred items, or minor quality concerns. Output is usable but may need follow-up. |
+| **RED** | Incomplete or concerning | Significant acceptance criteria unmet, scope reduced substantially, or output quality raises concerns. Requires explicit follow-up step or re-execution. |
+
+**Assessment rules:**
+- GREEN is the expectation for well-scoped SINGLE-PASS steps
+- YELLOW is normal for complex steps or first-attempt implementations
+- RED should trigger a follow-up action in the parent plan (add a remediation step or re-execute)
+- BLOCKED steps do not receive a quality gate — they have a Final Status of BLOCKED instead
 
 ---
 
