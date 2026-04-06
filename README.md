@@ -14,7 +14,9 @@ No agent auto-continues. No autonomous chaining. You review, you decide, you sel
 
 ## Quick Start
 
-**New here?** Open [START_HERE.md](START_HERE.md) — it will walk you through setup and your first demo run in under 5 minutes.
+**New here?** Select **@PrecursorStart** from the Copilot chat dropdown — it will walk you through setup and register your projects automatically.
+
+Or follow the step-by-step guide: [START_HERE.md](START_HERE.md)
 
 **Already set up?** Jump straight to the demo: open [demo/TOY_TASK.md](demo/TOY_TASK.md), then select **@PrecursorPlan** from the Copilot dropdown and paste the task.
 
@@ -50,6 +52,7 @@ Select an agent from the Copilot chat dropdown:
 
 | Agent | What it does |
 |-------|-------------|
+| **@PrecursorStart** | First-time setup and session boot |
 | **@PrecursorPlan** | Creates a plan from a task description |
 | **@PrecursorExecute** | Implements one step at a time |
 | **@PrecursorCloseout** | Closes out a step with a completion record |

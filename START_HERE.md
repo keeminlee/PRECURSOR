@@ -19,6 +19,15 @@ Get from clone to your first governed AI workflow in 5 minutes.
 
 That's it. Precursor is just markdown files — no install, no build, no dependencies.
 
+### Quick setup via @PrecursorStart
+
+The fastest way to get oriented: select **@PrecursorStart** from the Copilot chat dropdown. On first run, it will:
+- Verify your Precursor installation
+- Guide you on placing your project repos in the workspace
+- Build a project registry (`PROJECTS.md`) so Precursor knows what you're working on
+
+After setup, @PrecursorStart also serves as your session boot — select it at the start of any session to see your active projects and in-progress plans.
+
 ---
 
 ## Try the Demo
@@ -105,6 +114,7 @@ Every file is human-readable markdown. Every transition was reviewed by you. Tha
 
 ## What's Next
 
+- **Register your projects:** Select **@PrecursorStart** to set up your workspace and build a project registry
 - Use Precursor on your own tasks — replace the toy demo with any real work
 - The same Plan → Execute → Closeout loop scales from toy tasks to multi-step projects
 - For the complete file inventory, see [MANIFEST.md](MANIFEST.md)
