@@ -3,20 +3,20 @@
 > **Type:** Reusable task spec
 > **Trigger:** After PrecursorExecute completes a step
 > **Agent:** `.github/agents/PrecursorCloseout.agent.md`
-> **Flow:** `@PrecursorPlan` → `@PrecursorExecute` → **Closeout**
-> **Related skills:** `RECURSE_PLAN.md`, `RECURSE_EXECUTE.md`
+> **Flow:** `@PrecursorPlan` -> `@PrecursorExecute` -> **Closeout**
+> **Related skills:** `RECURSE_PLAN.md`, `RECURSE_EXECUTE.md`, `../RECURSOR/AGENT_PROVENANCE.md`
 
 ---
 
 ## Purpose
 
-Write a CLOSEOUT.md that captures final state and delta from spec, then propagate the UPDATE line back into the parent plan's steps table.
+Write a `CLOSEOUT.md` that captures final state and delta from spec, then propagate the `UPDATE` line back into the parent plan's steps table.
 
 ---
 
 ## Invocation
 
-```
+```text
 @PrecursorCloseout closeout PLANS/{slug}/{n}_{step-name}/
 ```
 
@@ -24,13 +24,13 @@ Write a CLOSEOUT.md that captures final state and delta from spec, then propagat
 
 ## Tree Reference
 
-```
+```text
 PLANS/{slug}/
-├── {slug}.md                        ← update the step row here
-└── {n}_{step-name}/
-    ├── {n}_{step-name}.md           ← original spec (read for delta)
-    ├── PROGRESS.md                  ← source of truth for what was done
-    └── CLOSEOUT.md                  ← you write this
+|-- {slug}.md
+`-- {n}_{step-name}/
+    |-- {n}_{step-name}.md
+    |-- PROGRESS.md
+    `-- CLOSEOUT.md
 ```
 
 ---
@@ -41,84 +41,96 @@ PLANS/{slug}/
 # CLOSEOUT: {n}_{step-name}
 > **Parent:** [{n}_{step-name}.md]({n}_{step-name}.md)
 > **Final Status:** COMPLETE | PARTIAL | BLOCKED
-> **Quality Gate:** GREEN | YELLOW | RED
+> **Quality Gate:** GREEN | YELLOW | RED | N/A
 > **Closed:** {MM_DD_YYYY}
 
 ---
 
 ## Final State
 
-{One paragraph: what exists now that didn't before, and what works.}
+{One paragraph: what exists now that did not before, and what works.}
+
+## Provenance
+
+- Agent Platform: `codex` | `copilot` | `unknown`
+- Workflow Agent: `PrecursorCloseout`
+- Transcript Source: `Codex` | `Copilot` | `ChatGPT` | `Unknown`
+- Transcript Path: `{path}` | `PENDING transcript extraction`
+- Session ID: `{id}` | `UNKNOWN`
+- Ledger File: `.recursor/ledger/{YYYY-MM-DD}.jsonl` | `NOT RECORDED`
+- Commit: `{sha}` | `NOT COMMITTED`
 
 ## Quality Assessment
 
-**Gate: {GREEN | YELLOW | RED}**
-{One sentence justifying the gate. See Quality Gate Definitions below.}
+**Gate: {GREEN | YELLOW | RED | N/A}**
+{One sentence justifying the gate.}
 
-## Spec → Progress Delta
+## Spec -> Progress Delta
 
 {What changed from the original plan: scope changes, surprises, deferred items.
 If none: "Implemented as specified."}
 
 ## Artifacts Produced
 
-- `{path}` — {description}
+- `{path}` -> {description}
 
 ## UPDATE
 
-> Step {n} complete — {what was achieved, ≤15 words} [{QUALITY_GATE}]
+> Step {n} complete -> {what was achieved, <=15 words} [{QUALITY_GATE}]
 ```
-
-The UPDATE line is the canonical one-liner written back into the parent root plan's steps table under the Update column. The quality gate tag (e.g. `[GREEN]`) is appended so the parent plan summary shows quality at a glance.
-
----
-
-## Quality Gate Definitions
-
-| Gate | Meaning | Criteria |
-|------|---------|----------|
-| **GREEN** | Fully meets spec | All acceptance criteria met as written. No scope changes, no deferred items, no known issues. Output ready to build on. |
-| **YELLOW** | Meets intent, minor gaps | Acceptance criteria met but with scope adjustments, non-blocking deferred items, or minor quality concerns. Output is usable but may need follow-up. |
-| **RED** | Incomplete or concerning | Significant acceptance criteria unmet, scope reduced substantially, or output quality raises concerns. Requires explicit follow-up step or re-execution. |
-
-**Assessment rules:**
-- GREEN is the expectation for well-scoped SINGLE-PASS steps
-- YELLOW is normal for complex steps or first-attempt implementations
-- RED should trigger a follow-up action in the parent plan (add a remediation step or re-execute)
-- BLOCKED steps do not receive a quality gate — they have a Final Status of BLOCKED instead
 
 ---
 
 ## Mode Behavior: CLOSEOUT
 
 **Read:**
-- `PLANS/{slug}/{n}_{step-name}/{n}_{step-name}.md` — original spec
-- `PLANS/{slug}/{n}_{step-name}/PROGRESS.md` — what was actually done
-- `PLANS/{slug}/{slug}.md` — to locate the step row
+- `PLANS/{slug}/{n}_{step-name}/{n}_{step-name}.md`
+- `PLANS/{slug}/{n}_{step-name}/PROGRESS.md`
+- `PLANS/{slug}/{slug}.md`
 
 **Write:**
 1. `PLANS/{slug}/{n}_{step-name}/CLOSEOUT.md`
-2. **Propagate UPDATE** — find and update the step's row in the parent plan:
-   - **If this is a top-level step:** the parent plan is `PLANS/{slug}/{slug}.md`. Find the row in the `## Steps` table.
-   - **If this is a sub-step of a SPLIT step:** the parent is the expanded step spec (the file in the sub-step's `Parent` pointer, e.g. `../{n}_{step-name}.md`). Find the row in the `## Sub-plan > Sub-steps` table.
-   - In either case: find the row where `#` equals the step number and `Directory` matches
-   - Replace the `Status` cell with the Final Status (COMPLETE, PARTIAL, or BLOCKED)
-   - Replace the `Update` cell with the UPDATE one-liner
-   - **Do not touch any other row or any other section of the file**
+2. Append a `closeout` record to `.recursor/ledger/{YYYY-MM-DD}.jsonl` if the helper script exists
+3. Propagate the `UPDATE` line into the parent plan row
+
+**Preferred ledger command:**
+
+```bash
+node tools/record-agent-provenance.mjs \
+  --phase closeout \
+  --agent {codex|copilot|unknown} \
+  --workflow-agent PrecursorCloseout \
+  --step-path "PLANS/{slug}/{n}_{step-name}/" \
+  --status "{COMPLETE|PARTIAL|BLOCKED}" \
+  --quality-gate "{GREEN|YELLOW|RED|N/A}" \
+  --transcript-source {Codex|Copilot|ChatGPT|Unknown} \
+  --transcript-path "{path-or-PENDING}" \
+  --session-id "{id-or-UNKNOWN}" \
+  --commit "{sha-or-empty}"
+```
+
+If the helper script does not exist, still fill the provenance block in `CLOSEOUT.md`.
 
 **Key rules:**
-- Derive the UPDATE line from PROGRESS.md's final state; keep it ≤15 words
-- Final Status mirrors PROGRESS.md Status — `COMPLETE`, `PARTIAL`, or `BLOCKED`; the parent plan step row status matches
-- If PROGRESS.md does not exist or Status is still `IN PROGRESS`, stop and reply:
+- Derive the `UPDATE` line from `PROGRESS.md`'s final state; keep it <=15 words
+- Final Status mirrors `PROGRESS.md` Status
+- If `PROGRESS.md` does not exist or Status is still `IN PROGRESS`, stop and reply:
   > *"PROGRESS.md is not complete. Finish the step with `@PrecursorExecute execute PLANS/{slug}/{n}_{step-name}/` first."*
+- `CLOSEOUT.md` provenance must match `PROGRESS.md` provenance unless you explicitly explain the drift
 
 **Git commit:**
-After writing CLOSEOUT.md and propagating the UPDATE, commit the changes:
-1. `git add -A` from the workspace root
-2. `git commit -m "closeout: {slug} step {n} — {UPDATE one-liner}"`
-3. Confirm with `git log --oneline -1`
+If PRECURSOR is operating in a git-backed workspace and a commit is created after human review, include these provenance trailers whenever possible:
 
-If the workspace has no `.git/` or git is unavailable, skip and note it.
+```text
+Agent: {codex|copilot|unknown}
+Workflow-Agent: PrecursorCloseout
+Transcript-Source: {Codex|Copilot|ChatGPT|Unknown}
+Transcript: {path-or-PENDING}
+Session-ID: {id-or-UNKNOWN}
+```
+
+If git is unavailable, skip and note it in `CLOSEOUT.md`.
 
 **After completing:**
-> *"Closed out and committed. {slug}.md step row updated. Full plan status: [paste current Steps table]"*
+
+> *"Closed out. {slug}.md step row updated and ready for human review."*
