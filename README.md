@@ -1,12 +1,17 @@
 # Precursor
 
-> A structured, human-governed workflow for GitHub Copilot that enforces review between every meaningful step.
+> A structured, human-governed workflow for GitHub Copilot that serves as the enterprise-safe `PRECURSOR` lane.
 
 ---
 
 ## What Is Precursor?
 
-Precursor is a **Plan → Execute → Closeout** workflow for VS Code Copilot. It turns AI chat agents into a governed development pipeline where every action stops for human review before proceeding.
+Precursor is a **Plan -> Execute -> Closeout** workflow for VS Code Copilot.
+
+Inside the broader Starstory HQ architecture:
+- `PRECURSOR` is a lane
+- it is not the whole governance architecture
+- it is intentionally human-gated at every meaningful transition
 
 No agent auto-continues. No autonomous chaining. You review, you decide, you select the next step.
 
@@ -14,11 +19,11 @@ No agent auto-continues. No autonomous chaining. You review, you decide, you sel
 
 ## Quick Start
 
-**New here?** Select **@PrecursorStart** from the Copilot chat dropdown — it will walk you through setup and register your projects automatically.
+**New here?** Select **@PrecursorStart** from the Copilot chat dropdown.
 
-Or follow the step-by-step guide: [START_HERE.md](START_HERE.md)
+Or follow the step-by-step guide in [START_HERE.md](START_HERE.md).
 
-**Already set up?** Jump straight to the demo: open [demo/TOY_TASK.md](demo/TOY_TASK.md), then select **@PrecursorPlan** from the Copilot dropdown and paste the task.
+**Already set up?** Open [demo/TOY_TASK.md](demo/TOY_TASK.md), select **@PrecursorPlan**, and paste the task.
 
 ---
 
@@ -27,17 +32,17 @@ Or follow the step-by-step guide: [START_HERE.md](START_HERE.md)
 ### The Core Loop
 
 1. Select **@PrecursorPlan** from the Copilot dropdown and describe your task
-2. ⏸ Review the plan
+2. Review the plan
 3. Select **@PrecursorExecute** and point it at the first step
-4. ⏸ Review the implementation
+4. Review the implementation
 5. Select **@PrecursorCloseout** to record what happened
-6. ⏸ Review the closeout record
+6. Review the closeout record
 
-Every transition requires your explicit action. This is the **human review gate**:
+Every transition requires your explicit action.
 
-```
+```text
 ---
-⏸ AWAITING YOUR REVIEW
+AWAITING YOUR REVIEW
 - [ ] Review the output above
 - [ ] Revise if needed (edit files directly)
 - [ ] When satisfied, select the next agent from the dropdown
@@ -46,9 +51,18 @@ Every transition requires your explicit action. This is the **human review gate*
 
 ---
 
-## Agents
+## Lane Position
 
-Select an agent from the Copilot chat dropdown:
+Precursor is the enterprise-safe lane:
+- Copilot-native
+- human-reviewed between phases
+- suitable when explicit human gating is the main requirement
+
+It complements HQ lanes such as `RECURSOR/COPILOT` and `RECURSOR/CODEX`; it does not replace them.
+
+---
+
+## Agents
 
 | Agent | What it does |
 |-------|-------------|
@@ -61,11 +75,11 @@ Select an agent from the Copilot chat dropdown:
 
 ## What's Inside
 
-```
-.github/agents/         ← Agent definitions for VS Code Copilot
-SKILLS/                 ← Workflow skill specs (markdown files)
-demo/                   ← Toy demo task and expected outputs
-README.md               ← This file
-START_HERE.md           ← Quickstart guide
-MANIFEST.md             ← Complete file inventory
+```text
+.github/agents/         -> Agent definitions for VS Code Copilot
+SKILLS/                 -> Workflow skill specs
+demo/                   -> Toy demo task and expected outputs
+README.md               -> This file
+START_HERE.md           -> Quickstart guide
+MANIFEST.md             -> Complete file inventory
 ```

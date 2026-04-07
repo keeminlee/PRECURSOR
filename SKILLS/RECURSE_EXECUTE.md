@@ -54,6 +54,7 @@ Written **before touching any code or other files**. Updated as each criterion i
 ## Provenance
 
 - Agent Platform: `codex` | `copilot` | `unknown`
+- Execution Lane: `PRECURSOR` | `UNKNOWN`
 - Workflow Agent: `PrecursorExecute`
 - Transcript Source: `Codex` | `Copilot` | `ChatGPT` | `Unknown`
 - Transcript Path: `{path}` | `PENDING transcript extraction`
@@ -95,6 +96,7 @@ Written **before touching any code or other files**. Updated as each criterion i
 node tools/record-agent-provenance.mjs \
   --phase start \
   --agent {codex|copilot|unknown} \
+  --execution-lane {PRECURSOR|UNKNOWN} \
   --workflow-agent PrecursorExecute \
   --step-path "PLANS/{slug}/{n}_{step-name}/" \
   --status "IN PROGRESS" \

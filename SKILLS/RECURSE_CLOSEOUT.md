@@ -53,6 +53,7 @@ PLANS/{slug}/
 ## Provenance
 
 - Agent Platform: `codex` | `copilot` | `unknown`
+- Execution Lane: `PRECURSOR` | `UNKNOWN`
 - Workflow Agent: `PrecursorCloseout`
 - Transcript Source: `Codex` | `Copilot` | `ChatGPT` | `Unknown`
 - Transcript Path: `{path}` | `PENDING transcript extraction`
@@ -99,6 +100,7 @@ If none: "Implemented as specified."}
 node tools/record-agent-provenance.mjs \
   --phase closeout \
   --agent {codex|copilot|unknown} \
+  --execution-lane {PRECURSOR|UNKNOWN} \
   --workflow-agent PrecursorCloseout \
   --step-path "PLANS/{slug}/{n}_{step-name}/" \
   --status "{COMPLETE|PARTIAL|BLOCKED}" \
@@ -127,6 +129,7 @@ Workflow-Agent: PrecursorCloseout
 Transcript-Source: {Codex|Copilot|ChatGPT|Unknown}
 Transcript: {path-or-PENDING}
 Session-ID: {id-or-UNKNOWN}
+Execution-Lane: {PRECURSOR|UNKNOWN}
 ```
 
 If git is unavailable, skip and note it in `CLOSEOUT.md`.
