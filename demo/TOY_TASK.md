@@ -26,3 +26,4 @@ The guide should:
 
 See [EXAMPLE_PLAN.md](EXAMPLE_PLAN.md) for what good Plan output looks like.
 See [EXAMPLE_EXECUTE.md](EXAMPLE_EXECUTE.md) for what good Execute output looks like.
+See [EXAMPLE_CLOSEOUT.md](EXAMPLE_CLOSEOUT.md) for what good Closeout output looks like — including the Artifact Verification and Test Verification tables that make every GREEN gate auditable.

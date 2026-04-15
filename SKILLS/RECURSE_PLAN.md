@@ -103,10 +103,16 @@ Anti-collision rule:
 
 ```markdown
 # Plan: {slug}
-> **Parent:** {path to parent root plan or macro-plan, if any}
+> **Parent:** {path to parent root plan or macro-plan, if any} | none
 > **Created:** {MM_DD_YYYY}
 > **Status:** NOT STARTED | IN PROGRESS | COMPLETE | ABANDONED
 > **Task:** {one-sentence task description}
+> **Principal Intent:** {What success materially means — the human-legible "this is done when…"}
+> **Greenlight:** YES — {date and approval context} | PENDING — requires human review
+> **Impact Tier:** T0 | T1 | T2 | T3
+> **Review Policy:** AUTO | DECOMP_REVIEW | STEP_GATE
+> **Source Inputs:**
+> - {upstream input — transcript, prior spec, review ticket, stakeholder ask, etc.}
 
 **Originating description:**
 {full natural language task as the user stated it}
@@ -115,9 +121,9 @@ Anti-collision rule:
 
 ## Steps
 
-| # | Directory | Step | Recommendation | Status | Update |
-|---|-----------|------|----------------|--------|--------|
-| 1 | `{1}_{step-name}/` | {step title} | SINGLE-PASS \| SPLIT | NOT STARTED | TBD |
+| # | Directory | Step | Recommendation | Depends on | Status | Update |
+|---|-----------|------|----------------|------------|--------|--------|
+| 1 | `{1}_{step-name}/` | {step title} | SINGLE-PASS \| SPLIT | — | NOT STARTED | — |
 
 ---
 
@@ -135,6 +141,32 @@ Anti-collision rule:
 
 1. {numbered decision -> rationale}
 ```
+
+**Root plan contract fields:**
+
+| Field | Required | Description |
+|-------|----------|-------------|
+| `Parent` | Yes | Path to parent root plan, or `none` for top-level plans |
+| `Status` | Yes | Lifecycle state |
+| `Task` | Yes | Concise one-line summary |
+| `Principal Intent` | Yes | What success materially means — the human-legible "this is done when…" |
+| `Greenlight` | Yes | `YES` with date and approval context, or `PENDING — requires human review` |
+| `Impact Tier` | Yes | `T0` (low, reversible) through `T3` (critical, hard to reverse). Declarative — does not relax the human gate. |
+| `Review Policy` | Yes | `AUTO` \| `DECOMP_REVIEW` \| `STEP_GATE`. Must be compatible with the declared Impact Tier. |
+| `Source Inputs` | Yes | Upstream inputs that shaped this spec (transcripts, prior specs, review tickets, stakeholder asks) |
+
+Plans generated in PLAN mode must include all of these fields. If the human has not yet greenlit the plan, set `Greenlight: PENDING — requires human review`.
+
+**Impact Tier guidance:**
+
+| Tier | Meaning | Typical review policy |
+|------|---------|----------------------|
+| T0 | Mechanical, reversible (file moves, doc edits, renames) | AUTO acceptable |
+| T1 | Structured output with clear acceptance (scaffolding, template instantiation) | AUTO or DECOMP_REVIEW |
+| T2 | Judgment-bearing (recommendations, assessments, quality verdicts) | DECOMP_REVIEW or STEP_GATE |
+| T3 | Strategic, hard to reverse (shipped changes, external comms, contract-level decisions) | STEP_GATE required |
+
+PRECURSOR is human-gated at every transition by design. Impact Tier and Review Policy are declarative metadata for auditors and reviewers; they do not relax the gate — they document its rationale.
 
 ### `{n}_{step-name}.md` (step spec)
 
@@ -175,7 +207,23 @@ Anti-collision rule:
 ## Reasoning
 
 {2-4 sentences justifying SINGLE-PASS vs SPLIT. If SPLIT: name the sub-tasks and explain why single-pass is unsafe. If SINGLE-PASS: state why the scope is bounded and unambiguous.}
+
+---
+
+## Test Requirements
+
+{Specify what tests this step must produce or update. Use the appropriate framework for the project (vitest, pytest, jest, go test, etc.). If the step is purely documentation/governance with no testable code, write `N/A — no testable code produced`.}
+
+- **Framework:** {vitest | pytest | jest | go test | N/A}
+- **Test scope:** {what behaviors or contracts the tests must cover}
+- **Existing test files to update:** {paths, or "none — new test file(s) needed"}
 ```
+
+**Test Requirements rules:**
+- Every step that produces or modifies executable code (source files, API routes, domain logic, UI components, CLI tools, scripts) **must** include a `## Test Requirements` section with concrete test scope.
+- Steps that produce only documentation, governance artifacts, plan files, or config with no runtime behavior may use `N/A — no testable code produced`.
+- The planner does not write the tests — it specifies what the executor must test. Test specs should be specific enough that the executor knows which behaviors to cover, but not so prescriptive that they dictate test implementation.
+- When a step modifies existing tested code, `Existing test files to update` must reference the relevant test files so the executor knows where to add or update assertions.
 
 ---
 
@@ -200,9 +248,32 @@ Write:
 Key rules:
 - Assign `SINGLE-PASS` or `SPLIT` to every step
 - Include `Reasoning` in every step spec
+- Include `Test Requirements` in every step spec (use `N/A — no testable code produced` when appropriate)
+- Steps table must include the `Depends on` column
+- Root plan must include all fields from the Root plan contract fields table (Principal Intent, Greenlight, Impact Tier, Review Policy, Source Inputs)
 - Keep the plan lane-fixed to `PRECURSOR`
 - After writing, display the steps table inline in chat and end with:
   > *"Plan ready. To implement: `@PrecursorExecute execute PLANS/{slug}/{n}_{step-name}/`"*
+
+**Coherence-verification step generation rule:**
+
+When a plan contains **two or more sibling steps**, always append a final `SINGLE-PASS` step whose sole purpose is to perform a coherence and verification pass over the entire plan level. This rule applies in both PLAN and RECURSE modes:
+
+- **PLAN mode:** If the root plan has 2+ steps, the last step must be a coherence-verification step.
+- **RECURSE mode:** If a SPLIT step decomposes into 2+ sub-steps, the last sub-step must be a coherence-verification step.
+- **Single-step plans:** If there is exactly one implementation step, no coherence-verification step is required.
+
+**Naming convention:** `{N}_coherence-verification-pass`, where `{N}` is the last step number. Example: a 5-step plan has `5_coherence-verification-pass/` as its final step. A SPLIT step with 3 sub-steps has `3_coherence-verification-pass/` as the final sub-step.
+
+The coherence-verification step audits:
+- stale assumptions carried across sibling steps
+- missing back-propagation to the parent plan
+- contradictions between step outputs
+- incomplete status propagation in the steps table
+- acceptance-criteria drift between spec and actual artifacts
+- missing or fabricated provenance
+- unresolved TODOs in produced artifacts
+- mismatches between produced artifacts and the parent plan's declared `Principal Intent`
 
 ---
 
@@ -246,6 +317,8 @@ Key rules:
 - `RECURSE` appends to the existing spec; it never creates a separate sub-plan file
 - Sub-step directories are direct children of the `SPLIT` step directory
 - Sub-step specs point back to the expanded spec via `[../{n}_{step-name}.md](../{n}_{step-name}.md)`
+- Include `Test Requirements` in every sub-step spec
+- **Coherence-verification rule applies:** if 2+ sub-steps exist, append a final `{N}_coherence-verification-pass` sub-step (see PLAN mode Key rules above for the full audit checklist)
 - After writing, display the sub-steps table inline in chat and end with:
   > *"Sub-plan ready. To implement: `@PrecursorExecute execute {path-to-step}/{m}_{sub-step}/`"*
 

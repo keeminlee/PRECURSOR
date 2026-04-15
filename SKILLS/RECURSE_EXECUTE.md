@@ -70,6 +70,12 @@ Written **before touching any code or other files**. Updated as each criterion i
 
 - `{path}` -> {what changed}
 
+## Test Results
+
+- **Command:** {exact command run, or "N/A — no testable code produced"}
+- **Result:** {PASS — N tests passed | FAIL — N passed, M failed | N/A}
+- **New/modified test files:** {list of test file paths, or "none"}
+
 ## Blockers
 
 {None. | Description of blocker and what is needed to unblock.}
@@ -108,6 +114,7 @@ node tools/record-agent-provenance.mjs \
 If the helper script does not exist, still fill the provenance block in `PROGRESS.md`.
 
 **Key rules:**
+- **TEST MANDATE:** If the step spec contains a `## Test Requirements` section that is not `N/A`, you **must** write or update tests as part of execution. Tests are not optional follow-up work — they are part of the step's deliverables. Write tests alongside or immediately after the implementation code, before marking the step complete. Run the test suite (`npm test`, `npx vitest run`, `pytest`, or the project's equivalent) and record the result in `PROGRESS.md` under the `## Test Results` section. If tests fail, fix them before marking the step complete. If a test failure reveals a genuine bug in the implementation, fix the implementation. If a test failure is due to a flawed test, fix the test and document the correction.
 - Read the step's `Recommendation` field first
   - If `SPLIT`: refuse and redirect to `@PrecursorPlan recurse`
   - If `SINGLE-PASS`: proceed

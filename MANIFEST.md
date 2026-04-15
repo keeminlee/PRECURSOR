@@ -42,5 +42,6 @@ Precursor is the enterprise-safe `PRECURSOR` lane:
 | Path | Description |
 |---|---|
 | `demo/TOY_TASK.md` | Self-contained demo task for first-run walkthrough |
-| `demo/EXAMPLE_PLAN.md` | Example of good planning output |
-| `demo/EXAMPLE_EXECUTE.md` | Example of good execute output |
+| `demo/EXAMPLE_PLAN.md` | Example of good planning output, including governance header and coherence-verification step |
+| `demo/EXAMPLE_EXECUTE.md` | Example of good execute output, including Test Results block |
+| `demo/EXAMPLE_CLOSEOUT.md` | Example of good closeout output, including Artifact Verification and Test Verification tables |
