@@ -56,9 +56,26 @@ If the user prefixes with `slug={name}`, use that value exactly.
 
 ## Path Resolution
 
-Plans are written to `PLANS/{slug}/` at the workspace root.
+PRECURSOR supports two plan-tree layouts. Both are first-class; EXECUTE and CLOSEOUT accept either path format.
 
-For `RECURSE` mode, the path is supplied directly in the invocation.
+| Layout | Path | When to use |
+|---|---|---|
+| **Day-level** (preferred when rituals are enabled) | `docs/week_N/{date}/PLANS/{slug}/` | Multi-day work; enables daily MORNING_COFFEE and EOD_RETRO rituals; keeps plans scoped to the day they were created |
+| **Flat** (simple default) | `PLANS/{slug}/` | Single-session tasks; no daily ritual dependency; workspace has no `docs/week_N/` directory |
+
+**Resolution rule for PLAN mode:**
+
+1. If any `docs/week_N/` folder exists at workspace root:
+   - Determine today's date in `MM_DD_YYYY` format
+   - List `docs/` for `week_N/` folders
+   - Find the `week_N/` that contains (or should contain) today's date directory
+   - Target path: `docs/week_N/{date}/PLANS/{slug}/`
+   - Create `PLANS/` under the day directory if it doesn't exist
+2. Otherwise: target path is `PLANS/{slug}/` at workspace root.
+
+For `RECURSE` mode, the path is supplied directly in the invocation — no resolution needed.
+
+Existing flat-layout plans continue to work unchanged. Day-level and flat-layout plans can coexist in the same workspace; each plan's `Parent` header points to its own root.
 
 ---
 
@@ -241,9 +258,11 @@ Read in parallel:
 - `PROJECTS.md` if it exists
 - Any source files the task description references directly
 
+**Resolve:** today's plan directory per the Path Resolution section above. Referred to below as `{PLAN_ROOT}` — either `docs/week_N/{date}/PLANS/{slug}/` (day-level) or `PLANS/{slug}/` (flat).
+
 Write:
-- `PLANS/{slug}/{slug}.md`
-- `PLANS/{slug}/{n}_{step-name}/{n}_{step-name}.md`
+- `{PLAN_ROOT}/{slug}.md` — root plan file
+- `{PLAN_ROOT}/{n}_{step-name}/{n}_{step-name}.md` — one spec per step, nothing else inside the step directory
 
 Key rules:
 - Assign `SINGLE-PASS` or `SPLIT` to every step

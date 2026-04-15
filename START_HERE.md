@@ -62,3 +62,28 @@ Nothing auto-continues.
 - Use Precursor on your own tasks
 - Review [MANIFEST.md](MANIFEST.md) for the file inventory
 - Treat Precursor as a lane-specific governed workflow, not as a universal abstraction
+
+---
+
+## Optional: Daily Rituals
+
+If you want daily orientation and retrospective documents, enable rituals during `@PrecursorStart` (BOOTSTRAP Phase E). Once enabled, a `docs/week_N/{date}/` directory is scaffolded for each working day, and two additional agents are available:
+
+- `@PrecursorMorning` → writes today's `MORNING_COFFEE.md` (active plans, carry-over, git signals, suggested next steps)
+- `@PrecursorRetro` → writes today's `EOD_RETRO.md` (what was planned vs. completed, decisions, carry-over for tomorrow)
+
+Rituals are additive. The core Plan → Execute → Closeout loop is unchanged whether rituals are enabled or not.
+
+---
+
+## Optional: Experimental Chained Mode
+
+`@PrecursorAuto` chains Plan → Execute → Closeout over a whole plan tree on an isolation branch. It has eight hard preconditions (including branch isolation, plan greenlight, CI config present) and halts on any test or verification failure. Never commits or merges.
+
+Use it only for prototype work where:
+- The plan is fully decomposed to SINGLE-PASS steps
+- The branch is disposable
+- CI is wired up and acts as the ambient pre-merge gate
+- Impact Tier is T0, T1, or T2 (T3 work must stay in the manual loop)
+
+See [SKILLS/AUTO_COPILOT.md](SKILLS/AUTO_COPILOT.md) for the full safety contract.
