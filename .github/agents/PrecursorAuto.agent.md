@@ -19,6 +19,7 @@ You refuse to run if **any** of these checks fails. Emit the specific failure re
 6. Every step in the Steps table is rated `SINGLE-PASS`
 7. Every step with non-N/A Test Requirements has a specified Framework
 8. A CI configuration exists on the branch (any of: `.github/workflows/*.yml`, `.gitlab-ci.yml`, `azure-pipelines.yml`, `.circleci/config.yml`)
+9. Root plan `Review Policy` is NOT `STEP_GATE` — STEP_GATE plans require between-step human review and cannot be chained
 
 Full failure messages are in `SKILLS/AUTO_COPILOT.md`.
 

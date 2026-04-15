@@ -185,6 +185,16 @@ Plans generated in PLAN mode must include all of these fields. If the human has 
 
 PRECURSOR is human-gated at every transition by design. Impact Tier and Review Policy are declarative metadata for auditors and reviewers; they do not relax the gate — they document its rationale.
 
+**Compatibility with AUTO_COPILOT (experimental chained mode):**
+
+The experimental `@PrecursorAuto` chained execution mode enforces additional constraints on the plan's governance header:
+
+- `Greenlight` must be `YES`
+- `Impact Tier` must be `T0`, `T1`, or `T2` (T3 hard-blocks)
+- `Review Policy` must NOT be `STEP_GATE` (STEP_GATE requires between-step human review, which AUTO_COPILOT by design replaces with CI + Artifact Verification)
+
+These constraints are declarative. The planner is not required to generate AUTO_COPILOT-compatible plans — but when planning work that will be chained, set Impact Tier appropriately and choose `AUTO` or `DECOMP_REVIEW` for Review Policy. See `SKILLS/AUTO_COPILOT.md` for the full precondition list.
+
 ### `{n}_{step-name}.md` (step spec)
 
 ```markdown

@@ -41,6 +41,7 @@ Before running the chain, verify each of the following. If any check fails, outp
 | 6 | Every step in the Steps table is rated `SINGLE-PASS` | "Step {n} is rated `SPLIT`. Decompose with `@PrecursorPlan recurse` before AUTO_COPILOT can run." |
 | 7 | Every step with non-N/A Test Requirements has a specified Framework | "Step {n} has `Test Requirements` without a Framework. Amend the spec before AUTO_COPILOT can run." |
 | 8 | A CI configuration exists (any of: `.github/workflows/*.yml`, `.gitlab-ci.yml`, `azure-pipelines.yml`, `.circleci/config.yml`) | "No CI configuration found. AUTO_COPILOT requires a CI gate on the branch. Add a CI config or use the default human-gated loop." |
+| 9 | Root plan `Review Policy` is NOT `STEP_GATE` | "Plan `Review Policy` is `STEP_GATE` — the human explicitly requested between-step review. AUTO_COPILOT bypasses between-step review and refuses STEP_GATE plans by design. Use the default human-gated loop, or change the Review Policy (and re-greenlight) if chained execution is actually appropriate." |
 
 **Note on precondition 8:** AUTO_COPILOT does not invoke CI. It verifies CI *exists* on the branch because the human's merge review is expected to wait for CI results. CI is the ambient gate that makes chained execution acceptable.
 
