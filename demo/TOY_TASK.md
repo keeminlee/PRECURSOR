@@ -1,6 +1,8 @@
-# Toy Demo Task
+# Toy Demo Task — Docs-Only (Secondary)
 
-Use this task to see Precursor's Plan → Execute → Closeout workflow in action.
+> This is the simpler docs-only demo. **For the primary interactive demo** — a mostly-done plan tree that assembles running HTML+JS with passing unit tests and a live Simple Browser preview — see [`../demo-interactive/TOY_TASK.md`](../demo-interactive/TOY_TASK.md).
+
+Use this task to see Precursor's Plan → Execute → Closeout workflow in action, run from scratch on a pure-documentation deliverable.
 
 ---
 

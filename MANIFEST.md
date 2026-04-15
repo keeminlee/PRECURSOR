@@ -53,7 +53,29 @@ Precursor is the enterprise-safe `PRECURSOR` lane:
 | `.github/agents/PrecursorRetro.agent.md` | End-of-day retrospective agent (optional ritual) |
 | `.github/agents/PrecursorAuto.agent.md` | EXPERIMENTAL chained-execution agent (opt-in, human-gated at greenlight + halt + merge) |
 
-## Demo (`demo/`)
+## Primary Demo — Interactive (`demo-interactive/`)
+
+The default interactive demo. Pre-staged plan tree where steps 1 and 2 are complete; users run only step 3, which assembles a running single-file HTML application, re-runs unit tests, and opens the artifact in VS Code's Simple Browser. Showcases Artifact Verification on real code.
+
+| Path | Description |
+|---|---|
+| `demo-interactive/TOY_TASK.md` | Task brief and runbook |
+| `demo-interactive/EXAMPLE_EXECUTE.md` | Expected structure of step 3's live PROGRESS.md |
+| `demo-interactive/EXAMPLE_CLOSEOUT.md` | Expected structure of step 3's live CLOSEOUT.md — the flagship Artifact + Test Verification example |
+| `demo-interactive/governance-data.json` | Four-layer governance data contract (pre-staged, output of step 1) |
+| `demo-interactive/render.js` | Pure ES render module, 5 exports (pre-staged, output of step 1) |
+| `demo-interactive/render.test.js` | node:test suite, 5 passing tests (pre-staged, output of step 1) |
+| `demo-interactive/shell.html` | Pre-assembly HTML shell (pre-staged, output of step 2) |
+| `demo-interactive/styles.css` | Dark-mode stylesheet with tier-colored badges (pre-staged, output of step 2) |
+| `demo-interactive/PLANS/governance-visualizer/` | Plan tree — root + 3 step directories |
+| `demo-interactive/PLANS/governance-visualizer/governance-visualizer.md` | Root plan with full governance header; 2 steps COMPLETE GREEN, step 3 NOT STARTED |
+| `demo-interactive/PLANS/governance-visualizer/1_data-and-rendering/` | Step 1 spec + PROGRESS + CLOSEOUT (pre-staged complete) |
+| `demo-interactive/PLANS/governance-visualizer/2_shell-and-styling/` | Step 2 spec + PROGRESS + CLOSEOUT (pre-staged complete) |
+| `demo-interactive/PLANS/governance-visualizer/3_assemble-and-preview/` | Step 3 spec only — the open step users run |
+
+## Secondary Demo — Docs-Only (`demo/`)
+
+Simpler demo for audiences who just want to see the loop mechanics. Produces a markdown Quick Start guide through all three phases run from scratch.
 
 | Path | Description |
 |---|---|
