@@ -34,13 +34,13 @@ Precursor is the enterprise-safe `PRECURSOR` lane in the broader Starstory archi
 
 The **default demo is interactive**: a mostly-done plan tree where steps 1 and 2 are pre-staged complete and you run only step 3, which assembles a self-contained HTML application, runs unit tests, and opens it in VS Code's Simple Browser.
 
-1. Open [demo-interactive/TOY_TASK.md](demo-interactive/TOY_TASK.md) and read the brief
-2. Open `demo-interactive/` as your VS Code workspace root
+1. Open this `PRECURSOR/` repo root as your VS Code workspace
+2. Open [demo-interactive/TOY_TASK.md](demo-interactive/TOY_TASK.md) and read the brief
 3. In Copilot chat, choose **@PrecursorExecute** and paste:
-   `execute PLANS/governance-visualizer/3_assemble-and-preview/`
+   `execute demo-interactive/PLANS/governance-visualizer/3_assemble-and-preview/`
 4. Review the resulting `PROGRESS.md` and the assembled `governance-visualizer.html` rendering in Simple Browser
 5. Choose **@PrecursorCloseout** and paste:
-   `closeout PLANS/governance-visualizer/3_assemble-and-preview/`
+   `closeout demo-interactive/PLANS/governance-visualizer/3_assemble-and-preview/`
 6. Review the Artifact Verification and Test Verification tables in `CLOSEOUT.md` — this is the audit surface reviewers care about
 
 For a simpler docs-only demo (writes a markdown Quick Start guide from scratch through all three phases), see [demo/TOY_TASK.md](demo/TOY_TASK.md).

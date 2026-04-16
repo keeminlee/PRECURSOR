@@ -55,7 +55,7 @@ Precursor is the enterprise-safe `PRECURSOR` lane:
 
 ## Primary Demo — Interactive (`demo-interactive/`)
 
-The default interactive demo. Pre-staged plan tree where steps 1 and 2 are complete; users run only step 3, which assembles a running single-file HTML application, re-runs unit tests, and opens the artifact in VS Code's Simple Browser. Showcases Artifact Verification on real code.
+The default interactive demo. Keep the VS Code workspace rooted at `PRECURSOR/`; the demo plan tree stays under `demo-interactive/PLANS/`. Steps 1 and 2 are complete, and users run only step 3, which assembles a running single-file HTML application, re-runs unit tests, and opens the artifact in VS Code's Simple Browser. Showcases Artifact Verification on real code.
 
 | Path | Description |
 |---|---|

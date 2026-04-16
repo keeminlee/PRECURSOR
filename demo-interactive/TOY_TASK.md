@@ -19,20 +19,20 @@ This is the default interactive demo. A simpler docs-only demo lives at [`../dem
 
 ## How to Run This Demo
 
-1. Open `PRECURSOR/demo-interactive/` as your VS Code workspace root, so the step paths below are clean.
-2. Review the existing plan tree at `PLANS/governance-visualizer/`. Notice:
+1. Open `PRECURSOR/` as your VS Code workspace root.
+2. Review the existing plan tree at `demo-interactive/PLANS/governance-visualizer/`. Notice:
    - Root plan file shows steps 1 and 2 complete with `[GREEN]` tags, step 3 pending
    - Each completed step has its PROGRESS.md, CLOSEOUT.md, and Artifact Verification table filled in
-   - The artifacts themselves (`governance-data.json`, `render.js`, `render.test.js`, `shell.html`, `styles.css`) exist at the workspace root
-3. (Optional but satisfying) Run the existing tests: `node --test render.test.js` — confirms step 1's module works before you ask Copilot to consume it.
+   - The artifacts themselves (`governance-data.json`, `render.js`, `render.test.js`, `shell.html`, `styles.css`) exist under `demo-interactive/`
+3. (Optional but satisfying) Run the existing tests: `cd demo-interactive && node --test render.test.js` — confirms step 1's module works before you ask Copilot to consume it.
 4. Select **@PrecursorExecute** from the Copilot agent dropdown and paste:
    ```
-   execute PLANS/governance-visualizer/3_assemble-and-preview/
+   execute demo-interactive/PLANS/governance-visualizer/3_assemble-and-preview/
    ```
 5. Review the PROGRESS.md it produces and the assembled `governance-visualizer.html`. Verify it opened in Simple Browser and renders the four layers with tier-colored badges.
 6. Select **@PrecursorCloseout** and paste:
    ```
-   closeout PLANS/governance-visualizer/3_assemble-and-preview/
+   closeout demo-interactive/PLANS/governance-visualizer/3_assemble-and-preview/
    ```
 7. Review the CLOSEOUT.md — especially the **Artifact Verification** and **Test Verification** tables. That's the moment the audit story lands.
 
@@ -42,7 +42,7 @@ See [EXAMPLE_EXECUTE.md](EXAMPLE_EXECUTE.md) and [EXAMPLE_CLOSEOUT.md](EXAMPLE_C
 
 ## What You Can Point At During a Presentation
 
-**"Every step has a re-readable audit trail."** Open any completed step's folder — `PLANS/governance-visualizer/1_data-and-rendering/`. There's the spec, the PROGRESS.md with Test Results, and the CLOSEOUT.md with Artifact Verification citing specific file contents. This is what a governed workflow leaves behind.
+**"Every step has a re-readable audit trail."** Open any completed step's folder — `demo-interactive/PLANS/governance-visualizer/1_data-and-rendering/`. There's the spec, the PROGRESS.md with Test Results, and the CLOSEOUT.md with Artifact Verification citing specific file contents. This is what a governed workflow leaves behind.
 
 **"The closeout agent cannot self-approve."** In step 3's CLOSEOUT.md (once you run it), the Artifact Verification table names the `governance-visualizer.html` file, opens it, and cites actual content found — heading names, inlined style tags, script module presence, data-id attributes. A GREEN gate with weak evidence is a process failure visible on the closeout record.
 

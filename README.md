@@ -23,7 +23,7 @@ No agent auto-continues. No autonomous chaining. You review, you decide, you sel
 
 Or follow the step-by-step guide in [START_HERE.md](START_HERE.md).
 
-**Already set up? Try the interactive demo first.** Open [demo-interactive/TOY_TASK.md](demo-interactive/TOY_TASK.md) — a mostly-done plan tree that produces a running self-contained HTML application with passing unit tests and a live Simple Browser preview. Runs a single Plan → Execute → Closeout cycle on one step, showcasing Artifact Verification on real code.
+**Already set up? Try the interactive demo first.** Keep VS Code rooted at `PRECURSOR/`, then open [demo-interactive/TOY_TASK.md](demo-interactive/TOY_TASK.md) — a mostly-done plan tree under `demo-interactive/PLANS/` that produces a running self-contained HTML application with passing unit tests and a live Simple Browser preview. Runs a single Plan → Execute → Closeout cycle on one step, showcasing Artifact Verification on real code.
 
 For a simpler docs-only walkthrough (writes a markdown Quick Start guide instead of code), see [demo/TOY_TASK.md](demo/TOY_TASK.md).
 
