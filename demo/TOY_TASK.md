@@ -1,6 +1,8 @@
-# Toy Demo Task
+# Toy Demo Task — Docs-Only (Secondary)
 
-Use this task to see Precursor's Plan → Execute → Closeout workflow in action.
+> This is the simpler docs-only demo. **For the primary interactive demo** — a mostly-done plan tree that assembles running HTML+JS with passing unit tests and a live Simple Browser preview — see [`../demo-interactive/TOY_TASK.md`](../demo-interactive/TOY_TASK.md).
+
+Use this task to see Precursor's Plan → Execute → Closeout workflow in action, run from scratch on a pure-documentation deliverable.
 
 ---
 
@@ -26,3 +28,4 @@ The guide should:
 
 See [EXAMPLE_PLAN.md](EXAMPLE_PLAN.md) for what good Plan output looks like.
 See [EXAMPLE_EXECUTE.md](EXAMPLE_EXECUTE.md) for what good Execute output looks like.
+See [EXAMPLE_CLOSEOUT.md](EXAMPLE_CLOSEOUT.md) for what good Closeout output looks like — including the Artifact Verification and Test Verification tables that make every GREEN gate auditable.

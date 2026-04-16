@@ -10,9 +10,19 @@ This is what @PrecursorExecute should produce when run on step 1 of the toy demo
 # PROGRESS: 1_draft-guide
 > **Parent:** [1_draft-guide.md](1_draft-guide.md)
 > **Status:** COMPLETE
-> **Started:** 04_06_2026
+> **Started:** 04_15_2026
 
 ---
+
+## Provenance
+
+- Agent Platform: `copilot`
+- Execution Lane: `PRECURSOR`
+- Workflow Agent: `PrecursorExecute`
+- Transcript Source: `Copilot`
+- Transcript Path: `PENDING transcript extraction`
+- Session ID: `UNKNOWN`
+- Ledger File: `NOT RECORDED`
 
 ## Log
 
@@ -25,6 +35,15 @@ This is what @PrecursorExecute should produce when run on step 1 of the toy demo
 ## Files Created / Modified
 
 - `QUICK_START_GUIDE.md` — new file, the Quick Start guide
+
+## Test Results
+
+- **Command:** N/A — no testable code produced
+- **Result:** N/A
+- **New/modified test files:** none
+
+Documentation artifact only; Test Requirements was `N/A` in the step spec.
+Intent and class conformance will be independently verified at closeout.
 
 ## Blockers
 
@@ -81,7 +100,10 @@ the actual deliverable — all human-reviewed, all traceable.
 When reviewing the live Execute output, check:
 
 1. **PROGRESS.md written first** — The agent should create PROGRESS.md before any other files
-2. **Acceptance criteria tracked** — Each criterion from the step spec should appear as a checked item in PROGRESS.md
-3. **Deliverable created** — The actual output file (QUICK_START_GUIDE.md) should exist
-4. **Review gate** — Did the agent stop and show `⏸ AWAITING YOUR REVIEW`?
-5. **Readable output** — Is the generated guide actually understandable?
+2. **Provenance block filled** — Platform, lane, workflow agent, transcript source all set (use `Unknown` where truly unknown; never fabricate)
+3. **Acceptance criteria tracked** — Each criterion from the step spec should appear as a checked item in PROGRESS.md
+4. **Test Results section present** — Even when Test Requirements was `N/A`, the section should exist and state so explicitly
+5. **TEST MANDATE honored** — If the step had non-N/A Test Requirements, tests must exist, the test command must be recorded, and the result must be captured
+6. **Deliverable created** — The actual output file (QUICK_START_GUIDE.md) should exist
+7. **Review gate** — Did the agent stop and show `⏸ AWAITING YOUR REVIEW`?
+8. **Readable output** — Is the generated guide actually understandable?

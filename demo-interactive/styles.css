@@ -1,0 +1,114 @@
+:root {
+  --bg: #0f1419;
+  --panel: #1a1f26;
+  --text: #e6e9ee;
+  --muted: #8b96a5;
+  --accent: #4a9eff;
+  --t0: #4ade80;
+  --t1: #60a5fa;
+  --t2: #fbbf24;
+  --t3: #f87171;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  margin: 0;
+  padding: 2rem 1.5rem;
+  line-height: 1.5;
+}
+
+.app {
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.page-header h1 {
+  font-size: 2rem;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  color: var(--muted);
+  font-size: 1.05rem;
+  margin: 0;
+}
+
+.layers {
+  display: grid;
+  gap: 1rem;
+}
+
+.layer {
+  background: var(--panel);
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.layer header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.layer h2 {
+  font-size: 1.2rem;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.description {
+  color: var(--muted);
+  margin: 0 0 0.9rem 0;
+  font-size: 0.95rem;
+}
+
+.fields {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.fields li {
+  padding: 0.5rem 0.75rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 6px;
+  font-size: 0.92rem;
+}
+
+.fields strong {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.tier {
+  display: inline-block;
+  padding: 0.2rem 0.55rem;
+  border-radius: 5px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  background: rgba(0, 0, 0, 0.3);
+  flex-shrink: 0;
+}
+
+.tier-t0 { color: var(--t0); border: 1px solid var(--t0); }
+.tier-t1 { color: var(--t1); border: 1px solid var(--t1); }
+.tier-t2 { color: var(--t2); border: 1px solid var(--t2); }
+.tier-t3 { color: var(--t3); border: 1px solid var(--t3); }

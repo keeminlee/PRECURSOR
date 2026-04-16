@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PRECURSOR — Governance Visualizer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app" class="app"></div>
+  <!--
+    This shell is the pre-assembly source. The final artifact
+    `governance-visualizer.html` produced by step 3 inlines the CSS, JS module,
+    and data so it runs in VS Code's Simple Browser without a local web server.
+    See PLANS/governance-visualizer/3_assemble-and-preview/ for the step spec.
+  -->
+  <script type="module">
+    import { renderAll } from './render.js';
+    fetch('./governance-data.json')
+      .then(r => r.json())
+      .then(data => {
+        document.getElementById('app').innerHTML = renderAll(data);
+      })
+      .catch(err => {
+        document.getElementById('app').innerHTML =
+          '<pre style="color:#f87171">Failed to load governance-data.json: ' +
+          err.message + '</pre>';
+      });
+  </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+{
+  "title": "PRECURSOR Governance Layers",
+  "subtitle": "Human-gated by default. Auditable by design.",
+  "layers": [
+    {
+      "id": "plan-governance",
+      "name": "Plan Governance Header",
+      "description": "Every plan declares its risk posture and human approval state before any work begins.",
+      "tier": "T2",
+      "fields": [
+        { "name": "Principal Intent", "value": "What success materially means — human-legible" },
+        { "name": "Greenlight", "value": "YES with date, or PENDING — requires human review" },
+        { "name": "Impact Tier", "value": "T0 (reversible) through T3 (hard to reverse)" },
+        { "name": "Review Policy", "value": "AUTO | DECOMP_REVIEW | STEP_GATE" },
+        { "name": "Source Inputs", "value": "Upstream signals that shaped this plan" }
+      ]
+    },
+    {
+      "id": "test-contract",
+      "name": "Three-Point Test Contract",
+      "description": "Test discipline spans plan specification, execution, and closeout verification.",
+      "tier": "T1",
+      "fields": [
+        { "name": "Plan: Test Requirements", "value": "Framework, scope, existing files declared up front" },
+        { "name": "Execute: TEST MANDATE", "value": "Write tests, run suite, record results in PROGRESS.md" },
+        { "name": "Closeout: Test Verification", "value": "Re-run and cite evidence in CLOSEOUT.md" }
+      ]
+    },
+    {
+      "id": "artifact-verification",
+      "name": "Artifact Verification",
+      "description": "The closeout agent re-reads every produced file from disk, performs class and intent checks, and cites specific structural evidence. No gate is self-approved.",
+      "tier": "T2",
+      "fields": [
+        { "name": "Class Check", "value": "Is the artifact the type it claims to be?" },
+        { "name": "Intent Check", "value": "Does it achieve what the step spec asked for?" },
+        { "name": "Evidence", "value": "Specific headings, schema elements, structural features cited" },
+        { "name": "Non-negotiable for GREEN", "value": "Every artifact row must PASS both checks" }
+      ]
+    },
+    {
+      "id": "coherence-verification",
+      "name": "Coherence Verification",
+      "description": "Multi-step plans append a final coherence-verification step that audits drift across sibling steps.",
+      "tier": "T1",
+      "fields": [
+        { "name": "Trigger", "value": "2 or more sibling steps in a plan or sub-plan" },
+        { "name": "Naming", "value": "{N}_coherence-verification-pass" },
+        { "name": "Audits", "value": "Drift, back-propagation, artifact / intent alignment, unresolved TODOs" }
+      ]
+    }
+  ]
+}
