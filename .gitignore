@@ -25,3 +25,7 @@ node_modules/
 __pycache__/
 *.pyc
 .venv/
+
+# OMC + Graphify runtime state
+.omc/
+graphify-out/
